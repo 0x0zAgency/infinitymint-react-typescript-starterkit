@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "ES2017",
+		"module": "NodeNext",
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"outDir": "dist",
+		"strict": false,
+		"allowJs": true,
+		"esModuleInterop": true
+	},
+	"files": ["./hardhat.config.ts", "./index.ts"]
+}
