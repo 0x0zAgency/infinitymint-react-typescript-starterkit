@@ -1,10 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { getBuildConfiguration } from './utils/sdk';
+
 
 function App() {
-  console.log(getBuildConfiguration())
   return (
     <div className="App">
       <header className="App-header">
