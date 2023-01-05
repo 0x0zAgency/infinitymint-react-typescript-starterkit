@@ -25,23 +25,14 @@
     "isolatedModules": true,
     "jsx": "react-jsx"
   },
-  "exclude": [
-    "dist",
-    "node_modules",
-    "gems/__",
-    "gems/__cache",
-    "gems/@",
-    "projects"
-  ],
+  "exclude": ["dist", "node_modules", "gems/__", "gems/__cache", "gems/@"],
   "include": [
+    "./projects",
     "./src",
-    "./client",
-    "./app",
     "./gems",
     "./scripts",
     "./deploy",
-    "./imports",
-    "./examples"
+    "./imports"
   ],
   "files": ["./hardhat.config.ts", "./index.ts"]
 }
