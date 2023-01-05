@@ -13,7 +13,8 @@
     "rootDirs": ["./src"],
     "paths": {
       "@app/*": ["./node_modules/infinitymint/dist/app/*"],
-      "@client/*": ["./node_modules/infinitymint/dist/client/*"]
+      "@client/*": ["./node_modules/infinitymint/dist/client/*"],
+      "@react/*": ["./node_modules/dist/src/*"]
     },
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -22,7 +23,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx"
   },
   "exclude": [
@@ -41,9 +41,7 @@
     "./scripts",
     "./deploy",
     "./imports",
-    "./examples",
-    "./typechain-types",
-    "./index.ts"
+    "./examples"
   ],
   "files": ["./hardhat.config.ts", "./index.ts"]
 }

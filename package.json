@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "_moduleAliases": {
     "@app": "./node_modules/infinitymint/dist/app/",
-    "@client": "./node_modules/infinitymint/dist/client/"
+    "@client": "./node_modules/infinitymint/dist/client/",
+    "@react": "./dist/src/"
   },
   "scripts": {
     "test": "mocha",
@@ -11,7 +12,7 @@
     "build": "node react/build.js",
     "console": "npx tsc && npx hardhat compile && npx ts-node index.ts",
     "doc": "npx typedoc --options ./typedoc.json",
-    "postinstall": "npx tsc && npx hardhat compile"
+    "postinstall": "npx hardhat compile && npx tsc"
   },
   "author": "",
   "license": "ISC",
