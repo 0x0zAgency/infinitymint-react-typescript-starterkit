@@ -13,8 +13,7 @@
     "rootDirs": ["./src"],
     "paths": {
       "@app/*": ["./node_modules/infinitymint/dist/app/*"],
-      "@client/*": ["./node_modules/infinitymint/dist/client/*"],
-      "@react/*": ["./src/*"]
+      "@client/*": ["./node_modules/infinitymint-client/dist/src/*"]
     },
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,

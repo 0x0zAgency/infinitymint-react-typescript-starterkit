@@ -5,8 +5,7 @@
   "license": "ISC",
   "_moduleAliases": {
     "@app": "./node_modules/infinitymint/dist/app/",
-    "@client": "./node_modules/infinitymint/dist/client/",
-    "@react": "./dist/src/"
+    "@client": "./node_modules/infinitymint-client/dist/src/"
   },
   "scripts": {
     "test": "mocha",
@@ -126,6 +125,7 @@
     "https-browserify": "^1.0.0",
     "identity-obj-proxy": "^3.0.0",
     "infinitymint": "^1.0.23",
+    "infinitymint-client": "^1.1.1",
     "jest": "^27.4.3",
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
