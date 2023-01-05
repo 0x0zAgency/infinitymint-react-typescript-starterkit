@@ -6,11 +6,11 @@ Want to get straight into InfinityMint? Well this is the easiest solution for yo
 
 - Mac OSX (any version), Windows (XP, Vista, 7, 8, 10, 11), Debian (5+), Ubuntu (14+)
 - Node **16.0.0** or Higher
-- zsh, xTerm or equivalent. **might not work on bash**.
+- ZSH, Fish or equivalent. **(Bash users may/not encounter issues.)**
 
 ## 🗿 Boilerplates & Starter-kits
 
-Don't feel like starting from scratch? Check out our boilerplates and starter-kits and get building with InfinityMint straight away!
+Don't feel like using this template? Check out our other boilerplates and starter-kits and get building with InfinityMint straight away!
 
 [Javascript Boilerplate](https://github.com/0x0zAgency/infinitymint-javascript-boilerplate)
 
@@ -22,9 +22,26 @@ Don't feel like starting from scratch? Check out our boilerplates and starter-ki
 
 ## 🗿 Installation
 
-**Simply use this repository as a template**. If you are running this via a workspace then you can simply run `npm start` in the extracted folder else you will need to install your node modules by using `npm i`. By using this repository as a template it should automatically create a new git repository for you. You can then go ahead and make this new repository private or keep it public. You might encounter issues if you try using the bash terminal, instead use make sure to use the zsh terminal.
+**Simply use this repository as a template**. By using this repository as a template it should automatically create a new git repository for you.
 
-Please note that if you are running this through an online workspace, be patient. Wait for the Github workspace commands to fully complete before running `npm start`.
+Please note that if you are running this through an online workspace, be patient. Wait for the Github workspace commands to fully complete before running `npm start`. The *postCommandScript* is already gathering your node dependencies for you :)
+
+## Using this template
+
+For developer convenience, [TailwindCSS](<https://tailwindcss.com>) is already plugged in with PostCSS.
+If you do not wish to use it, simply uninstall & remove the following lines within your `webpack.config.js`:
+
+```js
+// Starts at line 119
+loader: require.resolve('postcss-loader'),
+    options: {
+     postcssOptions: {
+      // Necessary for external CSS imports to work
+      // https://github.com/facebook/create-react-app/issues/2677
+      ident: 'postcss',
+      config: true,
+			// And so on...
+```
 
 ## 🗿 Documentation
 
