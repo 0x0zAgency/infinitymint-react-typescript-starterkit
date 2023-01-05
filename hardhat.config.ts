@@ -6,22 +6,26 @@
  * put inside of here.
  */
 
-import 'module-alias/register';
-import {debugLog, prepareConfig, loadInfinityMint} from 'infinitymint/dist/app/helpers';
+import "module-alias/register";
+import {
+  debugLog,
+  prepareConfig,
+  loadInfinityMint,
+} from "infinitymint/dist/app/helpers";
 
 // Import our hardhat plugins
-import '@nomicfoundation/hardhat-toolbox';
-import '@nomiclabs/hardhat-ethers';
-import 'hardhat-change-network';
+import "@nomicfoundation/hardhat-toolbox";
+import "@nomiclabs/hardhat-ethers";
+import "hardhat-change-network";
 
 // Require dotenv
-require('dotenv').config({
-	override: false, // Will not override already established environment variables
+require("dotenv").config({
+  override: false, // Will not override already established environment variables
 }); // Allows hre.changeNetwork to occur
 
 // load infinitymint and create default files
 loadInfinityMint();
 // Return the infinitymint config file
 const config = prepareConfig();
-debugLog('loaded hardhat.config.ts');
+debugLog("loaded hardhat.config.ts");
 export default config.hardhat; // Export the infinity mint configuration file

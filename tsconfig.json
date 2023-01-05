@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "react-jsx"
   },
   "exclude": ["dist", "node_modules", "gems/__", "gems/__cache", "gems/@"],
