@@ -12,7 +12,7 @@
     "build": "node react/build.js",
     "console": "npx tsc && npx hardhat compile && npx ts-node index.ts",
     "doc": "npx typedoc --options ./typedoc.json",
-    "postinstall": "npx hardhat compile && npx tsc"
+    "postinstall": "npx tsc && npx hardhat compile"
   },
   "author": "",
   "license": "ISC",
