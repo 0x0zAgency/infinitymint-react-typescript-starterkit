@@ -1,10 +1,10 @@
-import {InfinityMintScript} from 'infinitymint/dist/app/interfaces';
+import type {InfinityMintScript} from 'infinitymint/dist/app/interfaces';
 
 const script: InfinityMintScript = {
 	name: 'My Example Scriptt',
 	description:
     'This is an example of how you can create a custom InfinityMint script',
-	execute: async IM => {
+	async execute(IM) {
 		IM.log('Hello World');
 	},
 };

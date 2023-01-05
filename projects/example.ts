@@ -29,14 +29,14 @@ const example = {
 		},
 	],
 	events: {
-		initialized: async ({log, eventEmitter}) => {
+		async initialized({log, eventEmitter}) {
 			log('project initialized');
 		},
-		failure: async ({log, event: error}) => {
+		async failure({log, event: error}) {
 			log('failed to launch successfully');
 			console.error(error);
 		},
-		success: async ({log}) => {
+		async success({log}) {
 			log('successfully launched example project');
 		},
 	},

@@ -1,52 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ['./src/**/*.{js,jsx}', './src/components/**/*.{js,jsx}'],
+	content: [
+		'./src/**/*.{js,jsx,ts,tsx}',
+	],
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/aspect-ratio'),
 	],
 	theme: {
-		darkMode: 'media',
-		fonts: {
-			display: [
-				'IBM Plex Mono',
-				'Menlo',
-				'monospace',
-				'gen',
-				'Ubuntu',
-				'Cantarell',
-				'Fira Sans',
-				'Droid Sans',
-				'Helvetica Neue',
-				'sans-serif',
-			],
-			serif: [
-				'ui-serif',
-				'Georgia',
-				'Cambria',
-				'"Times New Roman"',
-				'Times',
-				'serif',
-			],
-			mono: [
-				'ui-monospace',
-				'SFMono-Regular',
-				'Menlo',
-				'Monaco',
-				'Consolas',
-				'"Liberation Mono"',
-				'"Courier New"',
-				'monospace',
-			],
-		},
-		screens: {
-			sm: '640px',
-			md: '768px',
-			lg: '1024px',
-			xl: '1280px',
-			'2xl': '1536px',
-		},
 		colors: ({colors}) => ({
 			inherit: colors.inherit,
 			current: colors.current,
@@ -96,6 +58,41 @@ module.exports = {
 				900: '#4A1C28',
 			},
 		}),
+
+		fonts: {
+			display: [
+				'Menlo',
+				'monospace',
+				'gen',
+				'Ubuntu',
+				'Cantarell',
+				'Fira Sans',
+				'Droid Sans',
+				'Helvetica Neue',
+				'sans-serif',
+			],
+			serif: ['sans-serif', 'Livvic', 'Georgia', 'Cambria'],
+			mono: [
+				'IBM Plex Mono',
+				'SFMono-Regular',
+				'Menlo',
+				'Monaco',
+				'Consolas',
+				'"Liberation Mono"',
+				'"Courier New"',
+				'monospace',
+			],
+		},
+		screens: {
+			sm: '640px',
+			md: '768px',
+			lg: '1024px',
+			xl: '1280px',
+			'2xl': '1536px',
+		},
+
+		darkMode: 'media',
+
 		animation: {
 			none: 'none',
 			spin: 'spin 1s linear infinite',
@@ -113,6 +110,7 @@ module.exports = {
 			DEFAULT: theme('colors.columbia.200', 'currentColor'),
 		}),
 		borderOpacity: ({theme}) => theme('opacity'),
+
 		borderRadius: {
 			none: '0px',
 			sm: '0.125rem',
@@ -124,6 +122,7 @@ module.exports = {
 			'3xl': '1.5rem',
 			full: '9999px',
 		},
+
 		borderWidth: {
 			DEFAULT: '1px',
 			0: '0px',
@@ -131,15 +130,6 @@ module.exports = {
 			4: '4px',
 			8: '8px',
 		},
-		extend: {
-			bgImage: {
-				texture: 'url("/img/bg2.jpg")',
-				hero: 'url("/img/polaroid.jpg")',
-			},
-
-		},
+		extend: {},
 	},
-	plugins: [],
 };
-
-
