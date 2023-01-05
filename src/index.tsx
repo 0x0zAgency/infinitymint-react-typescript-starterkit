@@ -1,20 +1,19 @@
 //import tailwind
-import './index.css';
-
+import "./index.css";
+//import infintymint client stuff
+import "infinitymint-client";
 //import react + app
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import App from "./App";
 
 //standard react
-const root = ReactDOM.createRoot(
-	document.querySelector('#root'),
-);
+const root = ReactDOM.createRoot(document.querySelector("#root"));
 root.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
