@@ -14,7 +14,7 @@
     "paths": {
       "@app/*": ["./node_modules/infinitymint/dist/app/*"],
       "@client/*": ["./node_modules/infinitymint/dist/client/*"],
-      "@react/*": ["./node_modules/dist/src/*"]
+      "@react/*": ["./src/*"]
     },
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
