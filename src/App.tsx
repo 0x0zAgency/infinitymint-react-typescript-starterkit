@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, {Fragment} from 'react';
 
 const App = (): JSX.Element => (
 	<Fragment>
@@ -14,6 +14,6 @@ const App = (): JSX.Element => (
 			</div>
 		</div>
 	</Fragment>
-)
+);
 
 export default App;
