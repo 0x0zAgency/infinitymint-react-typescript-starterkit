@@ -128,7 +128,7 @@
     "jest": "^27.4.3",
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
-    "mini-css-extract-plugin": "^2.4.5",
+    "mini-css-extract-plugin": "^2.7.2",
     "module-alias": "^2.2.2",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",

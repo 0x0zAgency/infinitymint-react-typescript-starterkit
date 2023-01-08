@@ -1,7 +1,7 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const webpack = require('webpack');
 const resolve = require('resolve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +10,7 @@ const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
@@ -38,7 +38,7 @@ const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
 const babelRuntimeEntry = require.resolve('babel-preset-react-app');
 const babelRuntimeEntryHelpers = require.resolve(
 	'@babel/runtime/helpers/esm/assertThisInitialized',
-	{paths: [babelRuntimeEntry]},
+	{ paths: [babelRuntimeEntry] },
 );
 const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator', {
 	paths: [babelRuntimeEntry],
@@ -109,8 +109,11 @@ module.exports = function (webpackEnv) {
 		const loaders = [
 			isEnvDevelopment && require.resolve('style-loader'),
 			{
+				loader: MiniCssExtractPlugin.loader || 'style-loader',
+			},
+			{
 				loader: require.resolve('css-loader'),
-				options: cssOptions,
+				options: { ...cssOptions, import: true },
 			},
 			{
 				// Options for PostCSS as we reference these options twice
@@ -139,7 +142,7 @@ module.exports = function (webpackEnv) {
 								// so that it honors browserslist config in package.json
 								// which in turn let's users customize the target behavior as per their needs.
 								'postcss-normalize',
-							  ]
+							]
 							: [
 								'tailwindcss',
 								'postcss-flexbugs-fixes',
@@ -152,7 +155,7 @@ module.exports = function (webpackEnv) {
 										stage: 3,
 									},
 								],
-							  ],
+							],
 					},
 					sourceMap: isEnvProduction
 						? shouldUseSourceMap
@@ -226,10 +229,10 @@ module.exports = function (webpackEnv) {
 						.relative(paths.appSrc, info.absoluteResourcePath)
 						.replace(/\\/g, '/')
 				: isEnvDevelopment
-				  && (info =>
-				  	path
-				  		.resolve(info.absoluteResourcePath)
-				  		.replace(/\\/g, '/')),
+				&& (info =>
+					path
+						.resolve(info.absoluteResourcePath)
+						.replace(/\\/g, '/')),
 		},
 		cache: {
 			type: 'filesystem',
@@ -321,7 +324,7 @@ module.exports = function (webpackEnv) {
 					'scheduler/tracing': 'scheduler/tracing-profiling',
 				}),
 				...modules.webpackAliases,
-				...JSON.parse(fs.readFileSync(paths.appPackageJson, {encoding: 'utf-8'}))._moduleAliases,
+				...JSON.parse(fs.readFileSync(paths.appPackageJson, { encoding: 'utf-8' }))._moduleAliases,
 			},
 			fallback: {
 				path: require.resolve('path-browserify'),
@@ -394,7 +397,7 @@ module.exports = function (webpackEnv) {
 										prettier: false,
 										svgo: false,
 										svgoConfig: {
-											plugins: [{removeViewBox: false}],
+											plugins: [{ removeViewBox: false }],
 										},
 										titleProp: true,
 										ref: true,
@@ -436,8 +439,8 @@ module.exports = function (webpackEnv) {
 
 								plugins: [
 									isEnvDevelopment
-										&& shouldUseReactRefresh
-										&& require.resolve('react-refresh/babel'),
+									&& shouldUseReactRefresh
+									&& require.resolve('react-refresh/babel'),
 								].filter(Boolean),
 								// This is a feature of `babel-loader` for webpack (not Babel itself).
 								// It enables caching results in ./node_modules/.cache/babel-loader/
@@ -463,7 +466,7 @@ module.exports = function (webpackEnv) {
 										require.resolve(
 											'babel-preset-react-app/dependencies',
 										),
-										{helpers: true},
+										{ helpers: true },
 									],
 								],
 								cacheDirectory: true,
@@ -500,7 +503,6 @@ module.exports = function (webpackEnv) {
 							// containing package claims to have no side effects.
 							// Remove this when webpack adds a warning or an error for this.
 							// See https://github.com/webpack/webpack/issues/6571
-							sideEffects: true,
 						},
 						// Adds support for CSS Modules (https://github.com/css-modules/css-modules)
 						// using the extension .module.css
@@ -585,6 +587,7 @@ module.exports = function (webpackEnv) {
 		},
 		ignoreWarnings: [/Failed to parse source map/],
 		plugins: [
+			new MiniCssExtractPlugin(),
 			// Generates an `index.html` file with the <script> injected.
 			new HtmlWebpackPlugin(
 				Object.assign(
@@ -607,7 +610,7 @@ module.exports = function (webpackEnv) {
 								minifyCSS: true,
 								minifyURLs: true,
 							},
-						  }
+						}
 						: undefined,
 				),
 			),
@@ -615,10 +618,10 @@ module.exports = function (webpackEnv) {
 			// a network request.
 			// https://github.com/facebook/create-react-app/issues/5358
 			isEnvProduction
-				&& shouldInlineRuntimeChunk
-				&& new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [
-					/runtime-.+\.js/,
-				]),
+			&& shouldInlineRuntimeChunk
+			&& new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [
+				/runtime-.+\.js/,
+			]),
 			// Makes some environment variables available in index.html.
 			// The public URL is available as %PUBLIC_URL% in index.html, e.g.:
 			// <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
@@ -637,22 +640,22 @@ module.exports = function (webpackEnv) {
 			// Experimental hot reloading for React .
 			// https://github.com/facebook/react/tree/main/packages/react-refresh
 			isEnvDevelopment
-				&& shouldUseReactRefresh
-				&& new ReactRefreshWebpackPlugin({
-					overlay: false,
-				}),
+			&& shouldUseReactRefresh
+			&& new ReactRefreshWebpackPlugin({
+				overlay: false,
+			}),
 			// Watcher doesn't work well if you mistype casing in a path so we use
 			// a plugin that prints an error when you attempt to do this.
 			// See https://github.com/facebook/create-react-app/issues/240
 			isEnvDevelopment && new CaseSensitivePathsPlugin(),
 			isEnvProduction
-				&& new MiniCssExtractPlugin({
-					// Options similar to the same options in webpackOptions.output
-					// both options are optional
-					filename: 'static/css/[name].[contenthash:8].css',
-					chunkFilename:
-						'static/css/[name].[contenthash:8].chunk.css',
-				}),
+			&& new MiniCssExtractPlugin({
+				// Options similar to the same options in webpackOptions.output
+				// both options are optional
+				filename: 'static/css/[name].[contenthash:8].css',
+				chunkFilename:
+					'static/css/[name].[contenthash:8].chunk.css',
+			}),
 			// Generate an asset manifest file with the following content:
 			// - "files" key: Mapping of all asset filenames to their corresponding
 			//   output file so that tools can pick it up without having to parse
@@ -689,93 +692,93 @@ module.exports = function (webpackEnv) {
 			// Generate a service worker script that will precache, and keep up to date,
 			// the HTML & assets that are part of the webpack build.
 			isEnvProduction
-				&& fs.existsSync(swSrc)
-				&& new WorkboxWebpackPlugin.InjectManifest({
-					swSrc,
-					dontCacheBustURLsMatching: /\.[\da-f]{8}\./,
-					exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
-					// Bump up the default maximum size (2mb) that's precached,
-					// to make lazy-loading failure scenarios less likely.
-					// See https://github.com/cra-template/pwa/issues/13#issuecomment-722667270
-					maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-				}),
+			&& fs.existsSync(swSrc)
+			&& new WorkboxWebpackPlugin.InjectManifest({
+				swSrc,
+				dontCacheBustURLsMatching: /\.[\da-f]{8}\./,
+				exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
+				// Bump up the default maximum size (2mb) that's precached,
+				// to make lazy-loading failure scenarios less likely.
+				// See https://github.com/cra-template/pwa/issues/13#issuecomment-722667270
+				maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+			}),
 			// TypeScript type checking
 			useTypeScript
-				&& new ForkTsCheckerWebpackPlugin({
-					async: isEnvDevelopment,
-					typescript: {
-						typescriptPath: resolve.sync('typescript', {
-							basedir: paths.appNodeModules,
-						}),
-						configOverwrite: {
-							compilerOptions: {
-								sourceMap: isEnvProduction
-									? shouldUseSourceMap
-									: isEnvDevelopment,
-								skipLibCheck: true,
-								inlineSourceMap: false,
-								declarationMap: false,
-								noEmit: true,
-								incremental: true,
-								tsBuildInfoFile: paths.appTsBuildInfoFile,
-							},
+			&& new ForkTsCheckerWebpackPlugin({
+				async: isEnvDevelopment,
+				typescript: {
+					typescriptPath: resolve.sync('typescript', {
+						basedir: paths.appNodeModules,
+					}),
+					configOverwrite: {
+						compilerOptions: {
+							sourceMap: isEnvProduction
+								? shouldUseSourceMap
+								: isEnvDevelopment,
+							skipLibCheck: true,
+							inlineSourceMap: false,
+							declarationMap: false,
+							noEmit: true,
+							incremental: true,
+							tsBuildInfoFile: paths.appTsBuildInfoFile,
 						},
-						context: paths.appPath,
-						diagnosticOptions: {
-							syntactic: true,
-						},
-						mode: 'write-references',
-						// Profile: true,
 					},
-					issue: {
-						// This one is specifically to match during CI tests,
-						// as micromatch doesn't match
-						// '../cra-template-typescript/template/src/App.tsx'
-						// otherwise.
-						include: [
-							{file: '../**/src/**/*.{ts,tsx}'},
-							{file: '**/src/**/*.{ts,tsx}'},
-						],
-						exclude: [
-							{file: '**/src/**/__tests__/**'},
-							{file: '**/src/**/?(*.){spec|test}.*'},
-							{file: '**/src/setupProxy.*'},
-							{file: '**/src/setupTests.*'},
-						],
+					context: paths.appPath,
+					diagnosticOptions: {
+						syntactic: true,
 					},
-					logger: {
-						infrastructure: 'silent',
-					},
-				}),
+					mode: 'write-references',
+					// Profile: true,
+				},
+				issue: {
+					// This one is specifically to match during CI tests,
+					// as micromatch doesn't match
+					// '../cra-template-typescript/template/src/App.tsx'
+					// otherwise.
+					include: [
+						{ file: '../**/src/**/*.{ts,tsx}' },
+						{ file: '**/src/**/*.{ts,tsx}' },
+					],
+					exclude: [
+						{ file: '**/src/**/__tests__/**' },
+						{ file: '**/src/**/?(*.){spec|test}.*' },
+						{ file: '**/src/setupProxy.*' },
+						{ file: '**/src/setupTests.*' },
+					],
+				},
+				logger: {
+					infrastructure: 'silent',
+				},
+			}),
 			!disableESLintPlugin
-				&& new ESLintPlugin({
-					// Plugin options
-					extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-					formatter: require.resolve(
-						'react-dev-utils/eslintFormatter',
-					),
-					eslintPath: require.resolve('eslint'),
-					failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
-					context: paths.appSrc,
-					cache: true,
-					cacheLocation: path.resolve(
-						paths.appNodeModules,
-						'.cache/.eslintcache',
-					),
-					// ESLint class options
-					cwd: paths.appPath,
-					resolvePluginsRelativeTo: __dirname,
-					baseConfig: {
-						extends: [
-							require.resolve('eslint-config-react-app/base'),
-						],
-						rules: {
-							...(!hasJsxRuntime && {
-								'react/react-in-jsx-scope': 'error',
-							}),
-						},
+			&& new ESLintPlugin({
+				// Plugin options
+				extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+				formatter: require.resolve(
+					'react-dev-utils/eslintFormatter',
+				),
+				eslintPath: require.resolve('eslint'),
+				failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+				context: paths.appSrc,
+				cache: true,
+				cacheLocation: path.resolve(
+					paths.appNodeModules,
+					'.cache/.eslintcache',
+				),
+				// ESLint class options
+				cwd: paths.appPath,
+				resolvePluginsRelativeTo: __dirname,
+				baseConfig: {
+					extends: [
+						require.resolve('eslint-config-react-app/base'),
+					],
+					rules: {
+						...(!hasJsxRuntime && {
+							'react/react-in-jsx-scope': 'error',
+						}),
 					},
-				}),
+				},
+			}),
 		].filter(Boolean),
 		// Turn off performance processing because we utilize
 		// our own hints via the FileSizeReporter

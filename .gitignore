@@ -36,5 +36,6 @@ dist/
 _www/
 docs/
 
-# Nix
+# Build folders
 nix/result
+/build
