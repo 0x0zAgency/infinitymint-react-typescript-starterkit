@@ -29,7 +29,7 @@ require("dotenv").config({
 });
 
 //load infinitymint and create default files
-loadInfinityMint(false, true);
+loadInfinityMint(false, false);
 
 //return the infinitymint config file
 let config = prepareConfig();
