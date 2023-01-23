@@ -6,26 +6,33 @@
  * put inside of here.
  */
 
+//them aliases
 import "module-alias/register";
-import {
-  debugLog,
-  prepareConfig,
-  loadInfinityMint,
-} from "infinitymint/dist/app/helpers";
-
-// Import our hardhat plugins
+//import our hardhat plugins
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-ethers";
-import "hardhat-change-network";
+import "hardhat-deploy";
+import "hardhat-change-network"; //allows hre.changeNetwork to occur
+import {
+  prepareConfig,
+  loadInfinityMint,
+  logDirect,
+} from "infinitymint/dist/app/helpers";
+import { createDefaultFactory } from "infinitymint/dist/app/pipes";
 
-// Require dotenv
+//create default pipe
+createDefaultFactory();
+
+//require dotenv
 require("dotenv").config({
-  override: false, // Will not override already established environment variables
-}); // Allows hre.changeNetwork to occur
+  override: false, //will not override already established environment variables
+});
 
-// load infinitymint and create default files
-loadInfinityMint();
-// Return the infinitymint config file
-const config = prepareConfig();
-debugLog("loaded hardhat.config.ts");
-export default config.hardhat; // Export the infinity mint configuration file
+//load infinitymint and create default files
+loadInfinityMint(false, true);
+
+//return the infinitymint config file
+let config = prepareConfig();
+
+logDirect("🧱 Loaded hardhat.config.ts");
+export default config.hardhat; //export the infinity mint configuration file
